@@ -1,0 +1,170 @@
+<html><head>
+<script type="text/javascript" src="demo-colorpicker_files/jquery-packer.htm">/* jquery core */</script>
+<script type="text/javascript" src="demo-colorpicker_files/jqDnR.js">/* drag/resize core */</script>
+<script type="text/javascript" src="demo-colorpicker_files/sgbeal-colorpicker.js">/* colorpicker code */</script>
+<link rel="stylesheet" href="demo-colorpicker_files/demo-colorpicker.css" type="text/css">
+<script type="text/javascript" id="DemoColorPickerSource1">
+$(document).ready(function(){
+	$('#MyDemoColorPicker1').empty().addColorPicker({
+		clickCallback: function(c) {
+			$('#ColorSelectionTarget1').css('background-color',c);
+		}
+	});
+});
+</script>
+<script type="text/javascript" id="DemoColorPickerSource2">
+$(document).ready(function(){
+	$('#MyDemoColorPicker2').empty().addColorPicker({
+		clickCallback: function(c) {
+			$('#ColorSelectionTarget2').css('border-color',c).css('color',c);
+		},
+		colors: [ '#fff', '#000', '#f00', '#0f0', '#00f' ],
+		iterationCallback: function(target,elem,color,iterationNumber) {
+      			if( iterationNumber < 4 /* colors array is undefined here :( */ ) {
+      				target.append('&nbsp;-&nbsp;');
+      			}
+			elem.html(color);
+		}
+		});
+});
+</script>
+
+<script type="text/javascript" id="DemoColorPickerSource3">
+$(document).ready(function(){
+	$('#DraggableColorPicker')
+	.empty()
+	.jqDrag()
+	.css('background-color','#f0a')
+	.css('width','200px')
+	.css('border', '3px solid #000')
+	.css('position','absolute') // if position is not set to 'relative' or 'absolute' then drag no workie
+	.css('padding','0.5em')
+	.css('cursor','move')
+	.addColorPicker({
+		clickCallback: function(c) {
+			$('#DemoSource3Pre').css('background-color',c);
+		},
+		colors: [ 'transparent', 'white', '#c0c0c0', 'red', 'green', 'blue', '#c0a' ]
+	})
+	//.append("<br/>You can drag this one around.")
+	;
+});
+</script></head><body style="background-color: rgb(240, 240, 240);">
+
+
+
+<h1>Rudimentary jQuery color picker demo</h1>
+
+(<a href="http://wanderinghorse.net/computing/javascript/jquery/colorpicker/">return to main page</a>)<br><br>
+
+<hr>
+<h2>Demo 1</h2>
+
+<div id="MyDemoColorPicker1"><span style="background-color: transparent;" class="ColorBlotch">?</span><span style="background-color: rgb(255, 255, 255);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(208, 208, 208);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(119, 119, 119);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(0, 0, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(255, 170, 170);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(255, 0, 255);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(255, 0, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(170, 0, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(144, 0, 255);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(255, 108, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(255, 255, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(255, 187, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(240, 230, 140);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(210, 178, 41);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(170, 255, 170);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(0, 255, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(0, 170, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(107, 142, 35);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(0, 119, 0);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(187, 221, 255);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(0, 255, 221);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(170, 170, 255);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(0, 0, 255);" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(0, 0, 170);" class="ColorBlotch">&nbsp;</span></div>
+<div id="ColorSelectionTarget1" style="border: 1px solid rgb(0, 0, 0); background-color: rgb(170, 0, 0);">
+When you click a color in the selector (above), this paragraph should change its background.
+Note that the '?' color entry (transparent) is not terribly useful with
+most elements, but is useful when the target of the color change is an
+IMG element which itself has a transparent background
+(e.g. transparent PNGs).
+
+<br><br>
+The JS code for this section looks something like:
+<pre class="code" id="DemoSource1Pre">
+$(document).ready(function(){
+	$('#MyDemoColorPicker1').empty().addColorPicker({
+		clickCallback: function(c) {
+			$('#ColorSelectionTarget1').css('background-color',c);
+		}
+	});
+});
+</pre>
+</div>
+
+<hr>
+<h2>Demo 2</h2>
+<div id="MyDemoColorPicker2"><span style="background-color: rgb(255, 255, 255);" class="ColorBlotch">#fff</span>&nbsp;-&nbsp;<span style="background-color: rgb(0, 0, 0);" class="ColorBlotch">#000</span>&nbsp;-&nbsp;<span style="background-color: rgb(255, 0, 0);" class="ColorBlotch">#f00</span>&nbsp;-&nbsp;<span style="background-color: rgb(0, 255, 0);" class="ColorBlotch">#0f0</span>&nbsp;-&nbsp;<span style="background-color: rgb(0, 0, 255);" class="ColorBlotch">#00f</span></div>
+
+
+<div id="ColorSelectionTarget2" style="border: 2px solid rgb(0, 0, 255); color: rgb(0, 0, 255);">
+When you click a color in the selector (above), this paragraph should change its border and text colors.
+<br><br>
+The JS code for this section looks something like:
+<pre class="code" id="DemoSource2Pre">
+$(document).ready(function(){
+	$('#MyDemoColorPicker2').empty().addColorPicker({
+		clickCallback: function(c) {
+			$('#ColorSelectionTarget2').css('border-color',c).css('color',c);
+		},
+		colors: [ '#fff', '#000', '#f00', '#0f0', '#00f' ],
+		iterationCallback: function(target,elem,color,iterationNumber) {
+      			if( iterationNumber &lt; 4 /* colors array is undefined here :( */ ) {
+      				target.append('&amp;nbsp;-&amp;nbsp;');
+      			}
+			elem.html(color);
+		}
+		});
+});
+</pre>
+
+</div>
+
+<hr>
+<h2>Draggable...</h2>
+
+By using a small bit of code from <a href="http://dev.iceburg.net/jquery/jqDnR/">the jqDnR plugin</a>
+you can create draggable color selectors. Try dragging the following selector around your screen:
+
+
+<br><br>
+
+The JS code for this section looks something like:
+
+<div style="border: 3px solid rgb(0, 0, 0); padding: 0.5em; background-color: rgb(255, 0, 170); width: 200px; position: absolute; cursor: move; opacity: 1;" id="DraggableColorPicker" class="jqDnR jqDrag"><span style="background-color: transparent;" class="ColorBlotch">?</span><span style="background-color: white;" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(192, 192, 192);" class="ColorBlotch">&nbsp;</span><span style="background-color: red;" class="ColorBlotch">&nbsp;</span><span style="background-color: green;" class="ColorBlotch">&nbsp;</span><span style="background-color: blue;" class="ColorBlotch">&nbsp;</span><span style="background-color: rgb(204, 0, 170);" class="ColorBlotch">&nbsp;</span></div>
+
+<pre style="background-color: rgb(0, 0, 255);" class="code" id="DemoSource3Pre">
+$(document).ready(function(){
+	$('#DraggableColorPicker')
+	.empty()
+	.jqDrag()
+	.css('background-color','#f0a')
+	.css('width','200px')
+	.css('border', '3px solid #000')
+	.css('position','absolute') // if position is not set to 'relative' or 'absolute' then drag no workie
+	.css('padding','0.5em')
+	.css('cursor','move')
+	.addColorPicker({
+		clickCallback: function(c) {
+			$('#DemoSource3Pre').css('background-color',c);
+		},
+		colors: [ 'transparent', 'white', '#c0c0c0', 'red', 'green', 'blue', '#c0a' ]
+	})
+	//.append("&lt;br/&gt;You can drag this one around.")
+	;
+});
+</pre>
+
+
+<hr>
+<h2>The End</h2>
+
+To see how the above examples work, view the source code for this page
+and search for "text/javascript" to jump directly to the script
+code. Also note that they implicitly use a style sheet definition
+which looks something like this:
+
+<pre class="code">.ColorBlotch { 
+	border: 1px solid #000000;
+	padding: 0 2px 0 2px;
+	font-family: monospace;
+	cursor: pointer;
+	font-size: 1.2em;
+}
+</pre>
+
+But the class name which the code uses is configurable (see the
+documentation, in the source code, for how it's done). The source code
+can be downloaded from
+<a href="http://wanderinghorse.net/computing/javascript/">the main page</a>.
+
+</body></html>
