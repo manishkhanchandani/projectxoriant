@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>JQuery Simple Color Picker</title>
+		<style type='text/css'>
+			.pheader
+			{
+				font-weight: bold;
+			}
+			
+			.row
+			{	
+				border-style: solid;
+				border-color: #000000;
+				border-width: 1px;
+				width: 750px;
+				margin-top: 5px;
+				padding: 10px;
+			}
+			
+			.code
+			{
+				background-color: #bce18d;
+				width: 100%;
+				padding: 5px;
+				margin-top: 5px;
+			}
+			
+			div#container
+			{
+				margin-left: auto;
+				margin-right: auto;
+				text-align: left;
+				width: 50em;
+			}
+			
+			body
+			{
+				text-align: center;
+			}
+			
+		</style>
+	</head>
+	<body>
+	<script src="jquery.js" type="text/javascript"></script>
+	<script src="jquery.colorpicker.js" type="text/javascript"></script>
+<script language="javascript">
+
+ $(function() {
+	$("#one").addColorPicker({'colorBg':'yes', 'cursor':'pointer',});
+	$("#two").addColorPicker({'colorBg':'yes', 'cursor':'pointer','autoClose':'no'});
+	$("#three").addColorPicker({'colorBg':'yes', 'cursor':'pointer','autoClose':'yes', 'callback': function(c){alert(c);}});	
+});
+</script>
+
+<div id='container'>
+<p class='pheader'>JQuery Simple Color Read Me</p><p>Click on a textbox to pop out the color picker. Below each example you will see the JS code needed to duplicate the desired effect. More options can be seen at the bottom of the page. The script has been tested with JQuery version 1.2.1..Enjoy! See the bottom for support details.</p>
+	<p class='pheader'>Demo Number One</p>
+	<div class='row'>
+		<ul>
+			<li>Autocloses.</li>
+			<li>Cursor is a pointer.</li>
+			<li>Background is colored.</li>
+		</ul>
+		<input type='text' name='simple' id='one' value='' />
+		<br />
+		Code:
+		<div class='code'>
+			$("#one").addColorPicker({'colorBg':'yes', 'cursor':'pointer',});
+		</div>
+	</div>
+	<p class='pheader'>Demo Number Two</p>
+	<div class='row'>
+		<ul>
+			<li>Closes when clicking on 'Close'.</li>
+			<li>Cursor is a pointer.</li>
+			<li>Background is colored.</li>
+		</ul>
+		<input type='text' name='simple' id='two' value='' />	
+		<br />
+		Code:
+		<div class='code'>
+			$("#two").addColorPicker({'colorBg':'yes', 'cursor':'pointer','autoClose':'no'});
+		</div>
+	</div>
+	<p class='pheader'>Demo Number Three</p>
+	<div class='row'>
+		<ul>
+			<li>Closes when clicking on 'Close'.</li>
+			<li>Cursor is a pointer.</li>
+			<li>Background is colored.</li>
+			<li><strong>Includes a callback function that alerts you of the color picked.</strong></li>
+		</ul>
+		<input type='text' name='simple' id='three' value='' />	
+		<br />
+		Code:
+		<div class='code'>
+			$("#three").addColorPicker({'colorBg':'yes', 'cursor':'pointer','autoClose':'yes', 'callback': function(c){alert(c);}});	
+		</div>
+	</div>
+	<p>Other options for the Color Picker include:</p>
+	<ul>
+		<li><strong>width:</strong> default value is 36</li>
+		<li><strong>showCode:</strong> default value is 'yes' (which means that it will show the HEX code of the color in the textbox)</li>
+		<li><strong>bgColor:</strong> default value is '#000000' (this sets the background color of the box, change to your own #HEX color code)</li>
+		<li><strong>closeText:</strong> default value is 'Close'</li>
+	</ul>
+	<p>Thank you for using the JQuery Simple Color Picker! Please go to <a href='http://www.felecan.com/'>Felecan</a> and click on 'Products' for support.</p>
+</div>
+
+	</body>
+</html>
