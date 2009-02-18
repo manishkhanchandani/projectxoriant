@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" media="screen" href="css/droppable_layout.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/droppable_widget.js.css" />
+
+		<script type="text/javascript" src="jquery.js"></script>
+
+	<script type="text/javascript" src="jquery.ui.all.js"></script>
+	<script type="text/javascript" src="jquery.layout.js"></script>
+
+	<script>	
+	var _v = 0;
+	var _v2 = 1;
+
+
+function ajax_update()
+{
+	var wrapperId 	=	'#content';
+	var postFile	=	'jquery.php';
+	_v++;
+	 _v2++;
+
+
+	$.get(postFile, { v2: _v2 , v: _v}, function(data){  		
+		$(wrapperId).html(data);	
+	});
+	setTimeout('ajax_update()', 2000);
+
+}
+	var outerLayout;
+
+	/*
+	*#######################
+	*		 ON PAGE LOAD
+	*#######################
+	*/
+	$(document).ready( function() {
+
+		// create the OUTER LAYOUT
+		outerLayout = $("body").layout();
+
+		// init the Sortables
+		$(".column").sortable({
+			connectWith:	$(".column")
+		,	placeholder:	'widget-placeholder'
+		,	cursor:			'move'
+		//	use a helper-clone that is append to 'body' so is not 'contained' by a pane
+		,	helper:			function (e,ui) { return $(ui).clone().appendTo('body').show(); }
+		});
+		
+		ajax_update();
+	});
+	
+
+	</script>
+</head>
+
+<body>
+<div class="ui-layout-center">
+	<ul id="column1" class="column">
+		<li class="widget color-green" id="widget_100>">
+			<div class="widget-head">
+				<h3>MAIN 1</h3>
+			</div>
+			<div class="widget-content">
+				Lorem ipsum fez kfez f	ezf ez
+			</div>
+		</li>
+	</ul>
+	
+</div>
+
+
+<div class="ui-layout-east">
+	<ul id="column4" class="column">
+		<li class="widget color-green" id="widget_201>">
+			<div class="widget-head">
+				<h3>EAST 1</h3>
+			</div>
+			<div class="widget-content">
+				Lorem ipsum fez kfez f	ezf ez
+			</div>
+
+		</li>
+
+	</ul>
+</div>
+
+
+<div class="ui-layout-west">
+	<ul id="column1" class="column">
+		<li class="widget color-green" id="widget_300>">
+			<div class="widget-head">
+				<h3>WEST 1</h3>
+			</div>
+
+			<div id="content" class="widget-content">
+				Lorem ipsum fez kfez f	ezf ez
+			</div>
+		</li>
+	</ul>
+</div>
+
+
+<div class="ui-layout-north">
+	<h3>Trading Screen</h3>
+	<ul id="column3" class="column">
+
+		<li class="widget color-green" id="widget_102>">
+			<div class="widget-head">
+				<h3>MAIN 3</h3>
+			</div>
+			<div class="widget-content">
+				Lorem ipsum fez kfez f	ezf ez
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div class="ui-layout-south">
+	<ul id="column4" class="column">
+
+		<li class="widget color-green" id="widget_104>">
+			<div class="widget-head">
+				<h3>Order Info Control</h3>
+			</div>
+			<div class="widget-content">
+				blah blah
+			</div>
+		</li>
+		<li class="widget color-green" id="widget_105>">
+
+			<div class="widget-head">
+				<h3>Exchange Info Control</h3>
+			</div>
+			<div class="widget-content">
+				blah blah blah blah
+			</div>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
