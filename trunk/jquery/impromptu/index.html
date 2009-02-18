@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<link rel="stylesheet" media="all" type="text/css" href="css/screen.css" />
+<link rel="stylesheet" media="all" type="text/css" href="css/examples.css" />
+<script type="text/javascript" src="scripts/jquery-1.3.1.min.js"></script>
+
+<script type="text/javascript" src="scripts/jquery.corner.js"></script>
+<script type="text/javascript" src="scripts/jquery-impromptu.2.2.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
+
+</head>
+
+<body>
+		<div class="wrapper">
+		  <h1>jQuery <em>Impromptu</em></h1>
+
+			
+			<div class="block about">
+				<h3>Docs</h3>
+				<p>There are  many options with Impromptu:</p>
+
+				<code>$.prompt( msg , options )</code>
+				<h4>msg</h4>
+				<p>The message can either be a string, or an object of "states".  Each state has the following properties:</p>
+				<dl>
+
+					<dt>html</dt>
+					<dd>A string of html or text for the content</dd>
+
+					
+					<dt>buttons</dt>
+					<dd>An object containing the text and values of each button the user may click. <em>Default: { Ok : true }</em></dd>
+					
+                                        <dt>focus</dt>
+					<dd>Index of the button to focus(0,1,2..). <em>Default: 0</em></dd>
+										
+					<dt>submit</dt>
+
+					<dd>A function to be called when the prompt is submitted. <em>Default: function(){ return true; }</em></dd>
+				</dl>
+				<code>
+					var temp = {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state0: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html:'test 1...',<br />
+
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons: { Cancel: false, Next: true },<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;focus: 1,<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit:function(v,m){ }<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state1: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html:'test 2..',<br />
+
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons: { Back: -1, Exit: 0, Next: 1 },<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;focus: 2,<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit:function(v,m){ }<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+					};<br />
+				</code>
+
+				<p>If a string is passed as the message in place of a state, buttons, focus, and submit will be substituted from the options below (just as with earlier versions of Impromptu).</p>
+				
+				<h4>options</h4>
+				<dl>
+
+					<dt>loaded</dt>
+					<dd>A function to be called when the prompt is fully loaded  <em>Default: function(){}</em></dd>
+					
+					<dt>submit</dt>
+
+					<dd>A function to be called when the prompt is submitted. <em>Default: function(){ return true; }</em></dd>
+					
+					<dt>callback</dt>
+					<dd>A function to be called when the prompt is submitted and removed. <em>Default: function(){}</em></dd>
+					
+                                        <dt>buttons</dt>
+					<dd>An object containing the text and values of each button the user may click. <em>Default: { Ok : true }</em></dd>
+
+					<dt>prefix</dt>
+					<dd>A prefix to be used for all css classes and html object id's. <em>Default: 'jqi'</em></dd>
+					
+                                        <dt>focus</dt>
+					<dd>Index of the button to focus(0,1,2..). <em>Default: 0</em></dd>
+
+                                        <dt>zIndex</dt>
+
+					<dd>zIndex to apply to the prompt. <em>Default: 999</em></dd>
+                                
+                                        <dt>useiframe</dt>
+					<dd>Will use an iframe for the overlay in IE6 to cover up &lt;select&gt;. <em>Default: false</em></dd>
+					
+					<dt>opacity</dt>
+					<dd>The prefered opacity of the transparent layer placed over the container. <em>Default: 0.6</em></dd>
+
+					
+                                        <dt>overlayspeed</dt>
+					<dd>The prefered speed of the fadeIn and fadeOut of the overlay ("slow", "fast", number) <em>Default: "slow"</em></dd>
+					
+                                        <dt>promptspeed</dt>
+					<dd>The prefered opacity of the showing of the prompt ("slow", "fast", number). <em>Default: "fast"</em></dd>
+
+					<dt>show</dt>
+
+					<dd>Name of the jQuery method to animate the entrance of the prompt("show","fadeIn","slideDown"). <em>Default: "fadeIn"</em></dd>
+
+					<dt>persistent</dt>
+					<dd>If the prompt should close when the fade is clicked (true doesn't close). <em>Default: true</em></dd>
+					
+				</dl>
+				<h4>returns</h4>
+
+				<p>returns a jQuery object of the prompt box and fade. <em>Note: This has changed to a container with everything within it, fade and prompt box.</em></p>
+
+				
+				<h3>Example CSS</h3>
+
+				<p>Below is an example of the css format that could be used with Impromptu.  You dont need to use any positioning and transparency attributes as Impromptu takes care of those for you.</p>
+				<p>Each element within your css should resemble the <em>prefix</em> option you supply to the function call.  If a prefix isn't supplied <em>jqi</em> is used.  The CSS for all examples can be found in <a href="css/examples.css" title="CSS File">examples.css</a></p>				
+				<code>
+
+					.jqifade{<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #aaaaaa; <br />
+					}<br />
+					div.jqi{ <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 400px; <br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #ffffff;<br /> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 11px; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-align: left; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border: solid 1px #eeeeee;<br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-moz-border-radius: 10px;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-webkit-border-radius: 10px;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 7px;<br />
+					}<br />
+					div.jqi .jqicontainer{ <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-weight: bold; <br />
+
+					}<br />
+					div.jqi .jqiclose{ <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: 4px; right: -2px; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 18px; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cursor: default; <br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: #bbbbbb; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-weight: bold; <br />
+					}<br />
+					div.jqi .jqimessage{ <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 10px; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line-height: 20px; <br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: #444444; <br />
+					}<br />
+					div.jqi .jqibuttons{ <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text-align: right; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 5px 0 5px 0; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border: solid 1px #eeeeee; <br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #f4f4f4;<br />
+					}<br />
+					div.jqi button{ <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding: 3px 10px;<br /> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin: 0 10px; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #2F6073; <br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border: solid 1px #f4f4f4; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: #ffffff; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-weight: bold; <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 12px; <br />
+					}<br />
+					div.jqi button:hover{ <br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #728A8C;<br />
+					}<br />
+					div.jqi button.jqidefaultbutton{ <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #BF5E26;<br />
+					}<br />
+					.jqiwarning .jqi .jqibuttons{ <br />
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #BF5E26;<br />
+					}<br />
+				</code>
+
+				<h3>Setting Defaults</h3>
+				<p>Setting defaults globally is optional with version 1.0.  To set any or all of the options mentioned above you may use the following syntax:</p>
+			  <code>
+
+					$.SetImpromptuDefaults({<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix: 'myPrompt',<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show: 'slideDown'<br />
+
+			    });</code></div>
+			<div class="block example">
+
+				<h3>Examples</h3>
+				
+				<p>To simply call Impromptu like you would a regular alert command:</p>
+
+				<code>$.prompt('Example 1');</code>
+
+				<div class="exlink">
+					<button onclick="$.prompt('Example 1')" title="Example 1">Example 1</button>
+				</div>
+
+				
+				<p>To add a a couple extra buttons with different values:</p>
+				<code>$.prompt('Example 2',{ buttons: { Ok: true, Cancel: false } });</code>
+
+				<div class="exlink">
+
+					<button onclick="$.prompt('Example 2',{ buttons: { Ok: true, Cancel: false } })" title="Example 2">Example 2</button>
+
+				</div>
+
+				
+				<p>To change the opacity of the fading overlay:</p>
+				<code>$.prompt('Example 3',{ opacity: 0.2 });</code>
+
+				<div class="exlink">
+
+					<button onclick="$.prompt('Example 3',{ opacity: 0.8 })" title="Example 3">Example 3</button>
+
+				</div>
+				
+				<p>To change the default focused button:</p>
+
+				<code>$.prompt('Example 4',{ buttons: { Ok: true, Cancel: false }, focus: 1 });</code>
+				<div class="exlink">
+					<button onclick="$.prompt('Example 4',{ buttons: { Ok: true, Cancel: false }, focus: 1 })" title="Example 4">Example 4</button>
+
+				</div>
+
+				
+				<p>To change the css name use prefix:</p>
+				<code>$.prompt('Example 5',{ prefix: 'impromptu' });</code>
+
+				<div class="exlink">
+					<button onclick="$.prompt('Example 5',{ prefix: 'impromptu' })" title="Example 5">Example 5</button>
+				</div>
+
+				
+				<p>To change the prompt show effect:</p>
+
+				<code>$.prompt('Example 6',{ show:'slideDown' });</code>
+				<div class="exlink">
+
+					<button onclick="$.prompt('Example 6',{ show:'slideDown' })" title="Example 6">Example 6</button>
+
+				</div>
+				
+				<p>To use your own jQuery effect:</p>
+
+				<code>
+
+					jQuery.fn.extend({<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myanimation: function(speed){<br />					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var t = $(this);<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(t.css("display") == "none") <br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.show(speed,function(){ <br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.hide(speed,function(){ <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.show(speed); }); });<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.hide(speed,function(){ <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.show(speed,function(){ <br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.hide(speed); }); });<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+
+					});<br /><br />
+
+					$.prompt('Example 7',{ show:'myanimation' });
+				</code>
+				<div class="exlink">
+					<button onclick="$.prompt('Example 7',{ show:'myanimation' })" title="Example 7">Example 7</button>
+
+				</div>
+				
+				<p>To add a callback function:</p>
+
+				<code>
+					function mycallbackfunc(v,m,f){<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.prompt('i clicked ' + v);<br />
+					}<br />
+
+					$.prompt('Example 8',{ callback: mycallbackfunc });
+				</code>
+				<div class="exlink">
+
+					<button onclick="$.prompt('Example 8',{ callback: mycallbackfunc });" title="Example 8">Example 8</button>
+				</div>
+				
+				<p>The callback function has three parameters.</p>
+				<ul>
+					<li>The first is the value of the button clicked.</li>
+					<li>The second is a jQuery object of the message within the active state when the user clicked the button.</li>
+					<li>The third is an object of key/value pairs of the form values.  The keys are the <strong>name</strong> attribute for the form element.</li>
+
+				</ul>
+				<p>If a form were in the prompt you could access its elements within this second parameter.  The values of the form fields are gathered for you within the third parameter.</p>
+				<code>
+
+					var txt = 'Please enter your name:&lt;br /&gt;<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" id="alertName" <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name="alertName" value="name here" /&gt;';<br /><br />
+
+					function mycallbackform(v,m,f){<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.prompt(v +' ' + f.alertName);<br />
+
+					}<br /><br />
+
+					$.prompt(txt,{<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callback: mycallbackform,<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons: { Hey: 'Hello', Bye: 'Good Bye' }<br />
+					});<br />
+
+				</code>
+
+				<div class="exlink">
+
+					<button onclick="$.prompt(txt,{ callback: mycallbackform, buttons: { Hey: 'Hello', Bye: 'Good Bye' } })" title="Example 9">Example 9</button>
+				</div>
+
+				
+				<p>The submit function can prevent the box from closing and the callback function from being called by returning false.  This is great for validating input before closing the prompt.  You must always return true or false with this function.</p>
+				<code>
+
+					var txt = 'Try submitting an empty field:&lt;br /&gt;<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" id="alertName" <br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name="myname" value="" /&gt;';<br /><br />
+
+					function mysubmitfunc(v,m){<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an = m.children('#alertName');<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(f.alertName == ""){<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an.css("border","solid #ff0000 1px");<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;<br />
+
+					}<br /><br />
+
+					$.prompt(txt,{<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit: mysubmitfunc,<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons: { Ok:true }<br />
+
+					});<br />
+
+				</code>
+				<div class="exlink">
+
+					<button onclick="$.prompt(txt2,{ submit: mysubmitfunc, buttons: { Ok:true } })" title="Example 10">Example 10</button>
+
+				</div>
+				
+				<p>Impromptu plays very nicely with other jQuery extensions like the <a href="http://methvin.com/jquery/jq-corner.html" title="jQuery Corner Plugin">jQuery Corner Plugin</a></p>
+
+				<code>$.prompt('Example 11',{prefix:'impromptu'}).children('#impromptu').corner();</code>
+
+				<div class="exlink">
+					<button onclick="$.prompt('Example 11',{prefix:'impromptu'}).children('#impromptu').corner()" title="Example 11">Example 11</button>
+
+				</div>
+				
+				<p>Give it a complete make over! Some buttons, a different prefix, a new entrance effect and some rounded corners!  The css is in the <a href="css/examples.css" title="CSS File">CSS file</a> for this page and the slideDown effect comes in the jQuery library.</p>
+
+				<code>
+
+					$.prompt('Example 12&lt;p&gt;Save these settings?&lt;/p&gt;',{ <br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons:{ Apply:1,Maybe:2,Never:3 },<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix:'colsJqi',<br />
+
+					}).children('#colsJqi').corner();
+				</code>
+
+				<div class="exlink">
+					<button onclick="$.prompt('Example 12<p>Save these settings?</p>',{ buttons:{ Apply:1,Maybe:2,Never:3 },prefix:'colsJqi'}).children('#colsJqi').corner()" title="Example 12">Example 12</button>
+
+				</div>
+				
+				<p>A nice light brown theme.</p>
+
+				<code>
+
+					var brown_theme_text = '&lt;h3&gt;Example 13&lt;/h3&gt;'+<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;p&gt;Save these settings?&lt;/p&gt;'+<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;img src="images/help.gif" alt="help" '+<br />
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class="helpImg" /&gt;';<br /><br />
+
+					$.prompt(brown_theme_text,{<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons:{Ok:true,Cancel:false}, <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix:'brownJqi'<br />
+
+					});
+				</code>
+
+				<div class="exlink">
+					<button onclick="$.prompt(brown_theme_text,{buttons:{Ok:true,Cancel:false}, prefix:'brownJqi'})" title="Example 13">Example 13</button>
+
+				</div>
+                
+                
+				<p>A nice clean blue theme.</p>
+
+				<code>
+
+					$.prompt('Hello World!!',{<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons:{Ok:true,Cancel:false}, <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix:'cleanblue'<br />
+
+					});
+				</code>
+                
+				<div class="exlink">
+					<button onclick="$.prompt('Hello World!!',{buttons:{Ok:true,Cancel:false}, prefix:'cleanblue'})" title="Example 14">Example 14</button>
+				</div>
+			
+				<p>A nice clean blue theme with an Ext feel.</p>
+
+				<code>
+
+					$.prompt('Hello World!!',{<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons:{Ok:true,Cancel:false}, <br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix:'extblue'<br />
+					});
+				</code>
+                
+				<div class="exlink">
+					<button onclick="$.prompt('Hello World!!',{buttons:{Ok:true,Cancel:false}, prefix:'extblue'})" title="Example 15">Example 15</button>
+
+				</div>
+				
+				<p>A simple States example.  For a more detailed example please see this <a href="http://trentrichardson.com/Impromptu/demos/demostates.html" title="States Demo">States Demo</a></p>
+
+				<code>
+					var statesdemo = {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state0: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html:'test 1.&lt;br /&gt;test 1..&lt;br /&gt;test 1...',<br />
+
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons: { Cancel: false, Next: true },<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;focus: 1,<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit:function(v,m){ <br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!v) return true;<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.ImpromptuGoToState('state1');<br />
+
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false; <br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state1: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html:'test 2',<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buttons: { Back: -1, Exit: 0 },<br />
+
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;focus: 1,<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit:function(v,m){ <br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(v==0) jQuery.ImpromptuClose()<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(v=-1)<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.ImpromptuGoToState('state0');<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false; <br />
+
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+					};<br /><br />
+					$.prompt(statesdemo);
+				</code>
+                
+				<div class="exlink">
+					<button onclick="$.prompt(statesdemo)" title="Example 16">Example 16</button>
+
+				</div>
+
+			</div>
+			<div class="clear"></div>
+		</div>
+
+</body>
+</html>
