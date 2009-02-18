@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="en" />
+
+	<title>Layout with Accordion</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/accordion.css" />
+
+	<style type="text/css">
+
+	body {
+		font-family: Arial, sans-serif;
+		font-size: 0.85em;
+	}
+	p {
+		margin: 1em 0;
+	}
+
+	.ui-layout-pane-west {
+		/* OVERRIDE 'default styles' */
+		padding: 0 !important;
+		overflow: hidden !important;
+	}
+
+	</style>
+
+	<!-- REQUIRED scripts for layout widget -->
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery.layout.js"></script>
+
+	<!-- OPTIONAL ui.draggable is required to resize panes -->
+	<script type="text/javascript" src="js/ui.core.js"></script>
+	<script type="text/javascript" src="js/ui.draggable.js"></script>
+
+	<!-- OPTIONAL animation effects for opening/closing panes -->
+	<script type="text/javascript" src="js/effects.core.js"></script>
+	<script type="text/javascript" src="js/effects.slide.js"></script>
+	<script type="text/javascript" src="js/effects.drop.js"></script>
+	<script type="text/javascript" src="js/effects.scale.js"></script>
+
+	<!-- CUSTOM VERSION OF ui.accordion.js - HAS A 'resize' METHOD -->
+
+	<script type="text/javascript" src="js/ui.accordion.resizable.js"></script>
+	<!-- easing library is used by Accordion widget -->
+	<script type="text/javascript" src="js/jquery.easing.js"></script>
+	<script type="text/javascript" src="js/jquery.easing.compatibility.js"></script>
+
+	<script type="text/javascript">
+
+	var outerLayout, myAccordion; // init global vars
+
+	$(document).ready( function() {
+
+		// PAGE LAYOUT
+		outerLayout = $('body').layout({
+			applyDefaultStyles:	true
+			// AUTO-RESIZE Accordion widget when west pane resizes
+		,	west__onresize:		function () { myAccordion.accordion('resize'); }
+		,	west__size:			300
+		});
+
+		// ACCORDION - inside the West pane
+		myAccordion = $("#MainMenu").accordion({
+			selectedClass: 	"active"
+		,	navigation:		true
+		,	fillSpace:		true
+		,	animated: 		"bounceslide"
+		});
+
+	});
+	</script>
+
+</head>
+
+<body>
+
+<div class="ui-layout-center"> Center Pane 
+
+	<p><b>NOTE</b>: content comes here </p>
+	</div>
+
+<div class="ui-layout-north"> North Pane </div>
+
+<div class="ui-layout-south"> South Pane </div>
+
+<div class="ui-layout-east"> East Pane </div>
+
+<div class="ui-layout-west">
+	<div id="MainMenu" class="basic">
+
+		<a>There is one obvious advantage:</a>
+		<div>
+			<p>
+				You've seen it coming!<br />
+				Buy now and get nothing for free!<br />
+				Well, at least no free beer. Perhaps a bear,<br />
+				if you can afford it.
+			</p>
+
+		</div>
+		<a>Now that you've got...</a>
+		<div>
+			<p>
+				your bear, you have to admit it!<br />
+				No, we aren't selling bears.
+			</p>
+		</div>
+
+		<a>Rent one bear, ...</a>
+		<div class="scrolling">
+			<p>
+				get two for three beer.
+			</p>
+			<p>
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+			</p>
+			<p>
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+			</p>
+			<p>
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+			</p>
+			<p>
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+			</p>
+			<p>
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+				And now for something completely different.<br />
+
+			</p>
+		</div>
+	</div>
+</div>
+
+</body>
+</html> 
