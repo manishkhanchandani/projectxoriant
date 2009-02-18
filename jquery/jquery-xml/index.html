@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>jquery XML Parsing</title>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="SOTC-JQueryXML.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function()
+{
+  $.ajax({
+    type: "GET",
+    url: "jquery_xml.xml",
+    dataType: "xml",
+    success: function(xml) { parseXml(xml); }
+  });
+});
+
+</script>
+</head>
+
+<body>
+<h1>XML Parsing Using JQUERY</h1>
+<h3>Sample XML:</h3>
+<div>
+<textarea rows="20" cols="130" disabled="disabled">
+<?xml version="1.0" encoding="utf-8" ?>
+<RecentTutorials>
+  <Tutorial author="The Reddest">
+    <Title>Silverlight and the Netflix API</Title>
+    <Categories>
+      <Category>Tutorials</Category>
+      <Category>Silverlight 2.0</Category>
+      <Category>Silverlight</Category>
+      <Category>C#</Category>
+      <Category>XAML</Category>
+    </Categories>
+    <Date>1/13/2009</Date>
+  </Tutorial>
+  <Tutorial author="The Hairiest">
+    <Title>Cake PHP 4 - Saving and Validating Data</Title>
+    <Categories>
+      <Category>Tutorials</Category>
+      <Category>CakePHP</Category>
+      <Category>PHP</Category>
+    </Categories>
+    <Date>1/12/2009</Date>
+  </Tutorial>
+  <Tutorial author="The Tallest">
+    <Title>Silverlight 2 - Using initParams</Title>
+    <Categories>
+      <Category>Tutorials</Category>
+      <Category>Silverlight 2.0</Category>
+      <Category>Silverlight</Category>
+      <Category>C#</Category>
+      <Category>HTML</Category>
+    </Categories>
+    <Date>1/6/2009</Date>
+</Tutorial>
+  <Tutorial author="The Fattest">
+    <Title>Controlling iTunes with AutoHotkey</Title>
+    <Categories>
+      <Category>Tutorials</Category>
+      <Category>AutoHotkey</Category>
+    </Categories>
+    <Date>12/12/2008</Date>
+  </Tutorial>
+</RecentTutorials></textarea>
+</div>
+<h3>Output:</h3>
+<div id="output"></div>
+</body>
+</html>
