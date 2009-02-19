@@ -1,8 +1,8 @@
 <pre>Array
 (
-    [currentFolderPath] => ../uploaded/
-    [new_folder] => abhi123
+    [currentFolderPath] => ../uploaded/sandip/
+    [new_folder] => sandip1
 )
 </pre>
 
-18/Feb/2009 11:42:03
+18/Feb/2009 12:01:02
